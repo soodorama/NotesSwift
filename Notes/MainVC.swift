@@ -56,13 +56,14 @@ class MainVC: UIViewController {
             if segue.identifier == "AddEditSegue" {
                 let addEditVC = nav.topViewController as! AddEditVC
                 addEditVC.delegate = self
-                addEditVC.data["title"] = tableData[indexPath.row].title
-                addEditVC.data["note"] = tableData[indexPath.row].note
-                addEditVC.data["date"] = "9/17/2018"
+                addEditVC.titleField.text = tableData[indexPath.row].title
+                addEditVC.noteField.text = tableData[indexPath.row].note
+                addEditVC.dateLabel.text = "9/17/2018"
                 addEditVC.data["header"] = "Edit Note"
             }
             else if segue.identifier == "ViewSegue" {
                 let viewVC = nav.topViewController as! ViewVC
+                viewVC.delegate = self
                 viewVC.data["title"] = tableData[indexPath.row].title
                 viewVC.data["note"] = tableData[indexPath.row].note
                 viewVC.data["date"] = "9/17/2018"
