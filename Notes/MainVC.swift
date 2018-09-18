@@ -21,12 +21,10 @@ class MainVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         fetchAllNotes()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
@@ -56,9 +54,9 @@ class MainVC: UIViewController {
             if segue.identifier == "AddEditSegue" {
                 let addEditVC = nav.topViewController as! AddEditVC
                 addEditVC.delegate = self
-                addEditVC.titleField.text = tableData[indexPath.row].title
-                addEditVC.noteField.text = tableData[indexPath.row].note
-                addEditVC.dateLabel.text = "9/17/2018"
+                addEditVC.data["title"] = tableData[indexPath.row].title
+                addEditVC.data["note"] = tableData[indexPath.row].note
+                addEditVC.data["date"] = "9/17/2018"
                 addEditVC.data["header"] = "Edit Note"
             }
             else if segue.identifier == "ViewSegue" {
@@ -119,6 +117,7 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
 extension MainVC: AddEditVCDelegate {
     
     func addNote(data: [String:Any?]) {
+        // update cell vs new cell if necessary!!!!
         let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into: context) as! Note
         note.title = data["title"] as! String
         note.note = data["note"] as! String

@@ -30,6 +30,9 @@ class AddEditVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        titleField.text = data["title"]
+        noteField.text = data["note"]
+        dateLabel.text = data["date"]
         self.title = data["header"]
     }
 
